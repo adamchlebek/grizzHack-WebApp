@@ -1,45 +1,79 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.IO;
 
 namespace grizzHack_WebApp
 {
     public partial class index : System.Web.UI.Page
     {
-        bool connected = false;
-        tcpClient tcp = new tcpClient();
+        private tcpClient tcp = new tcpClient();
+        string connectionNumber;
+        string computerCode;
+        string phoneCode;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            divStatus.Visible = false;
             try
             {
                 tcp.start();
-                lblStatus.Text = "Press Enter to Connect...";
+                lblStatus.Text = "Waiting for Connection Code...";
             }
             catch
             {
                 lblStatus.Text = "Server Offline.";
                 lblStatus.ForeColor = System.Drawing.Color.Red;
-                
             }
-            
-            //Try to checkFor Cookies
 
-            if (connected == false)
-            {
+                divStatus.Visible = false;
                 divUpload.Visible = false;
-            }
-            else {
-                divUpload.Visible = true;
-            }
-        }
+                
 
-        protected void txtNumbers_TextChanged(object sender, EventArgs e)
-        {
+                //Try to checkFor Cookies
+                //Get Both cookies
+
+
+                try
+                {
+                    computerCode = Request.Cookies["compCode"].Value;
+                }
+                catch
+                {
+                    computerCode = "";
+                }
+
+                try
+                {
+                    phoneCode = Request.Cookies["phoneCode"].Value;
+                }
+                catch
+                {
+                    Random random = new Random();
+                    int randomNumber = random.Next(11111, 100000);
+
+                    phoneCode = randomNumber.ToString();
+                    Response.Cookies["phoneCode"].Value = phoneCode;
+                }
+
+                connectionNumber = computerCode;
+
+            if (!Page.IsPostBack) {
+                if (computerCode != "")
+                {
+                    if (tryConnect(connectionNumber, phoneCode))
+                    {
+                        lblConnectionCode.Text = connectionNumber;
+                        divConnect.Visible = false;
+                        divStatus.Visible = true;
+                        divUpload.Visible = true;
+                    }
+                    else
+                    {
+                        divConnect.Visible = true;
+                        divStatus.Visible = false;
+                        divUpload.Visible = false;
+                    }
+
+                }
+            }
 
         }
 
@@ -49,12 +83,25 @@ namespace grizzHack_WebApp
             {
                 lblUploadStatus.Text = "Uploading...";
                 string imageStr = Convert.ToBase64String(FileUploadControl.FileBytes);
-                tcp.sendData("image" + ";" + txtNumbers.Text + ";" + "12345" + ";" + imageStr);
+
+
+                try
+                {
+                    connectionNumber = Request.Cookies["compCode"].Value;
+                    if (connectionNumber == "") {
+                        connectionNumber = txtNumbers.Text;
+                    }
+                } catch {
+                    connectionNumber = txtNumbers.Text;
+                }
+                
+                tcp.sendData("image" + ";" + connectionNumber + ";" + phoneCode + ";" + imageStr);        
                 divUpload.Visible = true;
                 divStatus.Visible = true;
                 lblUploadStatus.Text = "Image Sent.";
             }
-            else {
+            else
+            {
                 divUpload.Visible = true;
                 divStatus.Visible = true;
                 lblUploadStatus.Text = "No Image Selected.";
@@ -74,35 +121,58 @@ namespace grizzHack_WebApp
         {
             if (txtNumbers.Text.Length == 5)
             {
+                connectionNumber = txtNumbers.Text;
                 UpdatePanel1.Update();
                 lblStatus.Text = "Trying to Connect...";
-                //Try to Connect to that length
-                tcp.sendData("newphone" + ";" + txtNumbers.Text + ";" + "12345");
 
-                while (tcp.recievedData.Count == 0)
+                if (tryConnect(txtNumbers.Text, phoneCode))
                 {
-
-                }
-
-                string connectionStatus = tcp.recievedData[0].ToString();
-
-                if (connectionStatus.Equals("FAIL"))
-                {
-                    lblStatus.Text = "Unable to Connect.";
-                    lblStatus.ForeColor = System.Drawing.Color.Red;
-                    divUpload.Visible = false;
-                    divConnect.Visible = true;
-                }
-                else
-                {
-                    lblConnectionCode.Text = txtNumbers.Text;
+                    Response.Cookies["compCode"].Value = connectionNumber;
+                    lblConnectionCode.Text = connectionNumber;
                     lblStatus.ForeColor = System.Drawing.Color.Green;
                     divUpload.Visible = true;
                     divConnect.Visible = false;
                     divStatus.Visible = true;
                 }
+                else {
+                    lblStatus.Text = "Unable to Connect.";
+                    lblStatus.ForeColor = System.Drawing.Color.Red;
+                    divUpload.Visible = false;
+                    divConnect.Visible = true;
 
+                }
             }
+            else
+            {
+                lblStatus.Text = "Not enough characters.";
             }
         }
+
+        public bool tryConnect(string connectionStr, string pCode) {
+            tcp.sendData("newphone" + ";" + connectionStr + ";" + pCode);
+
+            while (tcp.recievedData.Count == 0)
+            {
+            }
+
+            string connectionStatus;
+
+            try
+            {
+                connectionStatus = tcp.recievedData[0].ToString();
+            }
+            catch
+            {
+                connectionStatus = "FAIL";
+            }
+
+            if (connectionStatus.Equals("FAIL"))
+            {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+    }
 }

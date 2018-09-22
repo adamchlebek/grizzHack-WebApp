@@ -16,18 +16,21 @@
         <form runat="server" id="upload" method="post" enctype="multipart/form-data">
 
             <div runat="server" class="upload" id ="divConnect">
-                <h3>Connect Code</h3>                  
-                <asp:TextBox class="form-control" ID="txtNumbers" runat="server" style="text-align:center;" pattern="\d*" maxlength="5" OnTextChanged="txtNumbers_TextChanged" AutoPostBack="True"></asp:TextBox>
-                <asp:Button ID="btnConnect" runat="server" style="display: flex; align-items: center; justify-content: center;" class="btn btn-success" Text="Connect" OnClick="btnConnect_Click" />
+                <h3>Connect Code</h3>
+                <asp:TextBox class="form-control" ID="txtNumbers" runat="server" style="text-align:center;" pattern="\d*" maxlength="5"></asp:TextBox>
+                <br />
+                <asp:Button ID="btnConnect" runat="server" class="btn btn-success" Text="Connect" OnClick="btnConnect_Click" />
+                <br />
+                <br />
                 <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-                        <asp:Label ID="lblStatus" runat="server" Text="Press Enter to Connect..."></asp:Label>
+                        <asp:Label ID="lblStatus" runat="server" Text="Waiting for Connection Code..."></asp:Label>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
 
-            <div runat="server" class="upload" id="divStatus" >
+            <div runat="server" class="upload" id="divStatus">
                 <h3>Conected To</h3>
                 <hr />
                 <asp:Label ID="lblConnectionCode" runat="server" Text="[#####]" class="connectionCode"></asp:Label>
@@ -35,10 +38,9 @@
                 <br />
             </div>
 
-                
             <div runat="server" id="divUpload" class="upload">
                 <div class="drop" style="text-align:center; margin: 20px 20px 20px 20px;">
-                    <asp:FileUpload id="FileUploadControl" runat="server" accept=".png,.jpg,.jpeg,.gif"/>
+                    <asp:FileUpload id="FileUploadControl" runat="server" accept=".png,.jpg,.jpeg,.gif" />
                     <asp:Button runat="server" id="btnUpload" text="Upload" onclick="UploadButton_Click" />
                     <br /><br />
                     <asp:Label runat="server" id="lblUploadStatus" text="Select an Image." />
