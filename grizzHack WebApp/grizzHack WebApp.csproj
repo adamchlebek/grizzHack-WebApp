@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.aspx" />
+    <Content Include="loading.gif" />
     <Content Include="stylesheet.css" />
     <Content Include="Web.config" />
   </ItemGroup>

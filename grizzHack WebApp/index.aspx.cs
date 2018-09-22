@@ -79,11 +79,13 @@ namespace grizzHack_WebApp
 
         protected void UploadButton_Click(object sender, EventArgs e)
         {
+            UpdatePanel2.Update();
             if (FileUploadControl.HasFile)
             {
                 lblUploadStatus.Text = "Uploading...";
+                imgLoading.Visible = true;
+                UpdatePanel2.Update();
                 string imageStr = Convert.ToBase64String(FileUploadControl.FileBytes);
-
 
                 try
                 {
@@ -99,6 +101,7 @@ namespace grizzHack_WebApp
                 divUpload.Visible = true;
                 divStatus.Visible = true;
                 lblUploadStatus.Text = "Image Sent.";
+                imgLoading.Visible = false;
             }
             else
             {
