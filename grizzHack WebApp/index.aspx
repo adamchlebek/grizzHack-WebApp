@@ -10,43 +10,38 @@
     <meta charset="utf-8" />
     <title>Home</title>
 </head>
-<body>
+<body style="background-color: lightgray">
     <br />
     <h1>NAME OF THING</h1>
+        <form runat="server" id="upload" method="post" enctype="multipart/form-data">
 
-            <form runat="server" id="upload" method="post" enctype="multipart/form-data">
+            <div runat="server" class="upload" id ="divConnect">
+                <h3>Connect Code</h3>                  
+                <asp:TextBox class="form-control" ID="txtNumbers" runat="server" style="text-align:center;" pattern="\d*" maxlength="5" OnTextChanged="txtNumbers_TextChanged" AutoPostBack="True"></asp:TextBox>
+                <asp:Button ID="btnConnect" runat="server" style="display: flex; align-items: center; justify-content: center;" class="btn btn-success" Text="Connect" />
+                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <asp:Label ID="lblStatus" runat="server" Text="Press Enter to Connect..."></asp:Label>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
 
-                <div class="upload">
-                    <h3>Connect Code</h3>
-                    <asp:TextBox class="form-control" ID="txtNumbers" runat="server" style="text-align:center" pattern="\d*" maxlength="5"></asp:TextBox>
-                    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                        <ContentTemplate>
-                            <asp:Label ID="lblStatus" runat="server" Text="[STATUS]"></asp:Label>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                    
-                </div>
-
+            <div runat="server" class="upload" id="divStatus" >
+                <h3>Conected To</h3>
+                <hr />
+                <asp:Label ID="lblConnectionCode" runat="server" Text="[#####]" class="connectionCode"></asp:Label>
+                <asp:LinkButton ID="newConnection" runat="server" OnClick="newConnection_Click">New Connection?</asp:LinkButton>
                 <br />
-                    <div class="upload">
-                            <div class="drop" id="divUpload" style="text-align:center; margin: 20px 20px 20px 20px;">
-                                <asp:FileUpload ID="FileUpload1" Style="display: none" runat="server" onchange="upload()" />
-                                <input type="button" value="Upload Image" class="btn btn-primary btn-lg" onclick="showBrowseDialog()"/>
-                    
-                                <asp:Button runat="server" ID="hideButton" Text="" Style="display: none;"/>
+            </div>
 
-                                <script type="text/javascript" language="javascript">
-                                    function showBrowseDialog() {
-                                        var fileuploadctrl = document.getElementById('<%= FileUpload1.ClientID %>');
-                                        fileuploadctrl.click();
-                                    }
-
-                                    function upload() {
-                                        var btn = document.getElementById('<%= hideButton.ClientID %>');
-                                        btn.click();
-                                    }
-                                </script>    
+                
+            <div runat="server" id="divUpload" class="upload">
+                <div class="drop" style="text-align:center; margin: 20px 20px 20px 20px;">
+                    <asp:FileUpload id="FileUploadControl" runat="server" accept=".png,.jpg,.jpeg,.gif"/>
+                    <asp:Button runat="server" id="UploadButton" text="Upload" onclick="UploadButton_Click" />
+                    <br /><br />
+                    <asp:Label runat="server" id="StatusLabel" text="Upload status: " />
                 </div>
             </div>
     </form>

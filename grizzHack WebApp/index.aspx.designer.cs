@@ -22,6 +22,15 @@ namespace grizzHack_WebApp {
         protected global::System.Web.UI.HtmlControls.HtmlForm upload;
         
         /// <summary>
+        /// divConnect control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divConnect;
+        
+        /// <summary>
         /// txtNumbers control.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,15 @@ namespace grizzHack_WebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNumbers;
+        
+        /// <summary>
+        /// btnConnect control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnConnect;
         
         /// <summary>
         /// ScriptManager1 control.
@@ -58,21 +76,66 @@ namespace grizzHack_WebApp {
         protected global::System.Web.UI.WebControls.Label lblStatus;
         
         /// <summary>
-        /// FileUpload1 control.
+        /// divStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divStatus;
         
         /// <summary>
-        /// hideButton control.
+        /// lblConnectionCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button hideButton;
+        protected global::System.Web.UI.WebControls.Label lblConnectionCode;
+        
+        /// <summary>
+        /// newConnection control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton newConnection;
+        
+        /// <summary>
+        /// divUpload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divUpload;
+        
+        /// <summary>
+        /// FileUploadControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FileUploadControl;
+        
+        /// <summary>
+        /// UploadButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button UploadButton;
+        
+        /// <summary>
+        /// StatusLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label StatusLabel;
     }
 }
