@@ -58,7 +58,7 @@ namespace grizzHack_WebApp
             if (!Page.IsPostBack) {
                 if (computerCode != "")
                 {
-                    if (tryConnect(connectionNumber, phoneCode))
+                    if (tryConnect(connectionNumber, phoneCode, false))
                     {
                         lblConnectionCode.Text = connectionNumber;
                         divConnect.Visible = false;
@@ -128,7 +128,7 @@ namespace grizzHack_WebApp
                 UpdatePanel1.Update();
                 lblStatus.Text = "Trying to Connect...";
 
-                if (tryConnect(txtNumbers.Text, phoneCode))
+                if (tryConnect(txtNumbers.Text, phoneCode, true))
                 {
                     Response.Cookies["compCode"].Value = connectionNumber;
                     lblConnectionCode.Text = connectionNumber;
@@ -151,8 +151,15 @@ namespace grizzHack_WebApp
             }
         }
 
-        public bool tryConnect(string connectionStr, string pCode) {
-            tcp.sendData("newphone" + ";" + connectionStr + ";" + pCode);
+        public bool tryConnect(string connectionStr, string pCode, bool status) {
+            if (status)
+            {
+                tcp.sendData("newphone" + ";" + connectionStr + ";" + pCode);
+            }
+            else {
+                tcp.sendData("oldphone" + ";" + connectionStr + ";" + pCode);
+            }
+            
 
             while (tcp.recievedData.Count == 0)
             {
@@ -176,6 +183,11 @@ namespace grizzHack_WebApp
             else {
                 return true;
             }
+        }
+
+        protected void txtNumbers_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
