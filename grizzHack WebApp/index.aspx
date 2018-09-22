@@ -18,7 +18,7 @@
             <div runat="server" class="upload" id ="divConnect">
                 <h3>Connect Code</h3>                  
                 <asp:TextBox class="form-control" ID="txtNumbers" runat="server" style="text-align:center;" pattern="\d*" maxlength="5" OnTextChanged="txtNumbers_TextChanged" AutoPostBack="True"></asp:TextBox>
-                <asp:Button ID="btnConnect" runat="server" style="display: flex; align-items: center; justify-content: center;" class="btn btn-success" Text="Connect" />
+                <asp:Button ID="btnConnect" runat="server" style="display: flex; align-items: center; justify-content: center;" class="btn btn-success" Text="Connect" OnClick="btnConnect_Click" />
                 <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
@@ -39,9 +39,9 @@
             <div runat="server" id="divUpload" class="upload">
                 <div class="drop" style="text-align:center; margin: 20px 20px 20px 20px;">
                     <asp:FileUpload id="FileUploadControl" runat="server" accept=".png,.jpg,.jpeg,.gif"/>
-                    <asp:Button runat="server" id="UploadButton" text="Upload" onclick="UploadButton_Click" />
+                    <asp:Button runat="server" id="btnUpload" text="Upload" onclick="UploadButton_Click" />
                     <br /><br />
-                    <asp:Label runat="server" id="StatusLabel" text="Upload status: " />
+                    <asp:Label runat="server" id="lblUploadStatus" text="Select an Image." />
                 </div>
             </div>
     </form>
