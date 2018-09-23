@@ -117,7 +117,6 @@ h3 {
     text-align: center;
     color: #EBDFE3;
     border: solid 2px solid white;
-
 }
 
 #txtConnect > .upload {
@@ -126,9 +125,9 @@ h3 {
 }
 
 #lblStatus {
-    text-align:center;
+    text-align: center;
     color: white;
-    font-weight:bold;
+    font-weight: bold;
 }
 
 #newConnection {
@@ -160,7 +159,6 @@ h3 {
     #drop a:hover {
     }
 
-
 #drop input {
     display: none;
 }
@@ -175,14 +173,11 @@ h3 {
     align-content: center;
 }
 
-
 .button {
     text-align: center;
     padding: 20px 0;
     border: solid 2px solid white;
 }
-
-
 
 /*--- Style ---*/
 

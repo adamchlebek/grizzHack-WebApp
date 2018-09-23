@@ -15,10 +15,9 @@
     <h1 style="color: #0099E5">NAME OF THING</h1>
     <form runat="server" id="upload" method="post" enctype="multipart/form-data">
 
-
         <div runat="server" class="upload" id="divConnect">
             <h3>Connect Code</h3>
-            <asp:TextBox class="form-control" ID="txtNumbers" runat="server" Style="text-align: center; align-content: center;" pattern="\d*" MaxLength="5" Font-Size="Larger" OnTextChanged="txtNumbers_TextChanged" ></asp:TextBox>
+            <asp:TextBox class="form-control" ID="txtNumbers" runat="server" Style="text-align: center; align-content: center;" pattern="\d*" MaxLength="5" Font-Size="Larger" OnTextChanged="txtNumbers_TextChanged"></asp:TextBox>
             <br />
             <asp:Button ID="btnConnect" runat="server" class="btn btn-success" Text="Connect" OnClick="btnConnect_Click" />
             <br />

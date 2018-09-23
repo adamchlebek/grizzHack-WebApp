@@ -1,14 +1,13 @@
 ﻿using System;
-using System.IO;
 
 namespace grizzHack_WebApp
 {
     public partial class index : System.Web.UI.Page
     {
         private tcpClient tcp = new tcpClient();
-        string connectionNumber;
-        string computerCode;
-        string phoneCode;
+        private string connectionNumber;
+        private string computerCode;
+        private string phoneCode;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,39 +22,38 @@ namespace grizzHack_WebApp
                 lblStatus.ForeColor = System.Drawing.Color.Red;
             }
 
-                divStatus.Visible = false;
-                divUpload.Visible = false;
-                
+            divStatus.Visible = false;
+            divUpload.Visible = false;
 
-                //Try to checkFor Cookies
-                //Get Both cookies
+            //Try to checkFor Cookies
+            //Get Both cookies
 
+            try
+            {
+                computerCode = Request.Cookies["compCode"].Value;
+            }
+            catch
+            {
+                computerCode = "";
+            }
 
-                try
-                {
-                    computerCode = Request.Cookies["compCode"].Value;
-                }
-                catch
-                {
-                    computerCode = "";
-                }
+            try
+            {
+                phoneCode = Request.Cookies["phoneCode"].Value;
+            }
+            catch
+            {
+                Random random = new Random();
+                int randomNumber = random.Next(11111, 100000);
 
-                try
-                {
-                    phoneCode = Request.Cookies["phoneCode"].Value;
-                }
-                catch
-                {
-                    Random random = new Random();
-                    int randomNumber = random.Next(11111, 100000);
+                phoneCode = randomNumber.ToString();
+                Response.Cookies["phoneCode"].Value = phoneCode;
+            }
 
-                    phoneCode = randomNumber.ToString();
-                    Response.Cookies["phoneCode"].Value = phoneCode;
-                }
+            connectionNumber = computerCode;
 
-                connectionNumber = computerCode;
-
-            if (!Page.IsPostBack) {
+            if (!Page.IsPostBack)
+            {
                 if (computerCode != "")
                 {
                     if (tryConnect(connectionNumber, phoneCode, false))
@@ -71,10 +69,8 @@ namespace grizzHack_WebApp
                         divStatus.Visible = false;
                         divUpload.Visible = false;
                     }
-
                 }
             }
-
         }
 
         protected void UploadButton_Click(object sender, EventArgs e)
@@ -90,14 +86,17 @@ namespace grizzHack_WebApp
                 try
                 {
                     connectionNumber = Request.Cookies["compCode"].Value;
-                    if (connectionNumber == "") {
+                    if (connectionNumber == "")
+                    {
                         connectionNumber = txtNumbers.Text;
                     }
-                } catch {
+                }
+                catch
+                {
                     connectionNumber = txtNumbers.Text;
                 }
-                
-                tcp.sendData("image" + ";" + connectionNumber + ";" + phoneCode + ";" + imageStr);        
+
+                tcp.sendData("image" + ";" + connectionNumber + ";" + phoneCode + ";" + imageStr);
                 divUpload.Visible = true;
                 divStatus.Visible = true;
                 lblUploadStatus.Text = "Image Sent.";
@@ -137,12 +136,12 @@ namespace grizzHack_WebApp
                     divConnect.Visible = false;
                     divStatus.Visible = true;
                 }
-                else {
+                else
+                {
                     lblStatus.Text = "Unable to Connect.";
                     lblStatus.ForeColor = System.Drawing.Color.Red;
                     divUpload.Visible = false;
                     divConnect.Visible = true;
-
                 }
             }
             else
@@ -151,15 +150,16 @@ namespace grizzHack_WebApp
             }
         }
 
-        public bool tryConnect(string connectionStr, string pCode, bool status) {
+        public bool tryConnect(string connectionStr, string pCode, bool status)
+        {
             if (status)
             {
                 tcp.sendData("newphone" + ";" + connectionStr + ";" + pCode);
             }
-            else {
+            else
+            {
                 tcp.sendData("oldphone" + ";" + connectionStr + ";" + pCode);
             }
-            
 
             while (tcp.recievedData.Count == 0)
             {
@@ -180,14 +180,14 @@ namespace grizzHack_WebApp
             {
                 return false;
             }
-            else {
+            else
+            {
                 return true;
             }
         }
 
         protected void txtNumbers_TextChanged(object sender, EventArgs e)
         {
-
         }
     }
 }
