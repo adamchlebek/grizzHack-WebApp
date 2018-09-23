@@ -34,6 +34,7 @@
             <h3>Conected To</h3>
             <hr />
             <asp:Label ID="lblConnectionCode" runat="server" Text="[#####]" class="connectionCode"></asp:Label>
+            <br />
             <asp:LinkButton ID="newConnection" runat="server" OnClick="newConnection_Click">New Connection?</asp:LinkButton>
             <br />
         </div>
@@ -44,7 +45,10 @@
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
                         <asp:FileUpload ID="FileUploadControl" runat="server" accept=".png,.jpg,.jpeg,.gif" />
-                        <asp:Button runat="server" ID="btnUpload" Text="Upload" OnClick="UploadButton_Click" />
+                        <br />
+                        <div class="upload-btn-wrapper">
+                            <asp:Button runat="server" class="uploadButton" ID="btnUpload" Text="Upload" OnClick="UploadButton_Click" />
+                        </div>
                         <br />
                         <br />
                         <asp:Label runat="server" ID="lblUploadStatus" Text="Select an Image." />

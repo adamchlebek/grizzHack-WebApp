@@ -185,9 +185,5 @@ namespace grizzHack_WebApp
                 return true;
             }
         }
-
-        protected void txtNumbers_TextChanged(object sender, EventArgs e)
-        {
-        }
     }
 }

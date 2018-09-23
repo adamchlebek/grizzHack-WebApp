@@ -40,6 +40,25 @@ ul {
     padding: 0;
 }
 
+.uploadButton {
+    border: 2px solid gray;
+    color: gray;
+    background-color: white;
+    padding: 16px 40px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 15px 15px 15px 15px;
+}
+
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+}
+
 .connectionCode {
     color: green;
     text-align: center;
