@@ -22,6 +22,7 @@ namespace grizzHack_WebApp
                 lblStatus.ForeColor = System.Drawing.Color.Red;
             }
 
+            divCheck.Visible = false;
             divStatus.Visible = false;
             divUpload.Visible = false;
 
@@ -79,8 +80,8 @@ namespace grizzHack_WebApp
             if (FileUploadControl.HasFile)
             {
                 lblUploadStatus.Text = "Uploading...";
-                imgLoading.Visible = true;
                 UpdatePanel2.Update();
+                System.Threading.Thread.Sleep(500);
                 string imageStr = Convert.ToBase64String(FileUploadControl.FileBytes);
 
                 try
@@ -99,8 +100,7 @@ namespace grizzHack_WebApp
                 tcp.sendData("image" + ";" + connectionNumber + ";" + phoneCode + ";" + imageStr);
                 divUpload.Visible = true;
                 divStatus.Visible = true;
-                lblUploadStatus.Text = "Image Sent.";
-                imgLoading.Visible = false;
+                divCheck.Visible = true;
             }
             else
             {
@@ -147,6 +147,12 @@ namespace grizzHack_WebApp
             else
             {
                 lblStatus.Text = "Not enough characters.";
+            }
+        }
+
+        protected void FileUpload_Uploading(object sender, EventArgs e) {
+            if (FileUploadControl.HasFile) {
+                lblStatus.Text = "Ready to Send!";
             }
         }
 
