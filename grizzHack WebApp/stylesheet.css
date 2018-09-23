@@ -106,10 +106,6 @@ h3 {
     text-align: center;
 }
 
-#txtNumbers {
-    text-align: center;
-}
-
 .upload {
     width: 30%;
     margin: 0 auto;
@@ -120,8 +116,14 @@ h3 {
     align-content: center;
     text-align: center;
     color: #EBDFE3;
-    border: solid 2px solid white;}
+    border: solid 2px solid white;
 
+}
+
+#txtConnect > .upload {
+    margin: 0 auto;
+    left: 50%;
+}
 
 #lblStatus {
     text-align:center;
