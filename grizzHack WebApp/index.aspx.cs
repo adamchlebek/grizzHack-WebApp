@@ -8,6 +8,7 @@ namespace grizzHack_WebApp
         private string connectionNumber;
         private string computerCode;
         private string phoneCode;
+        bool isCookie = false;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -29,13 +30,24 @@ namespace grizzHack_WebApp
             //Try to checkFor Cookies
             //Get Both cookies
 
-            try
+            if (Request.QueryString["id"] != null)
             {
-                computerCode = Request.Cookies["compCode"].Value;
+                connectionNumber = Request.QueryString["id"];
+
             }
-            catch
+            else
             {
-                computerCode = "";
+                try
+                {
+                    computerCode = Request.Cookies["compCode"].Value;
+                    isCookie = true;
+                }
+                catch
+                {
+                    computerCode = "";
+                }
+
+                connectionNumber = computerCode;
             }
 
             try
@@ -51,13 +63,14 @@ namespace grizzHack_WebApp
                 Response.Cookies["phoneCode"].Value = phoneCode;
             }
 
-            connectionNumber = computerCode;
+
+            
 
             if (!Page.IsPostBack)
             {
-                if (computerCode != "")
+                if (connectionNumber != "")
                 {
-                    if (tryConnect(connectionNumber, phoneCode, false))
+                    if (tryConnect(connectionNumber, phoneCode, !isCookie))
                     {
                         lblConnectionCode.Text = connectionNumber;
                         divConnect.Visible = false;
@@ -66,11 +79,15 @@ namespace grizzHack_WebApp
                     }
                     else
                     {
+                        txtNumbers.Text = connectionNumber;
+                        lblStatus.Text = "Unable to Connect.";
+                        lblStatus.ForeColor = System.Drawing.Color.Red;
                         divConnect.Visible = true;
                         divStatus.Visible = false;
                         divUpload.Visible = false;
                     }
                 }
+                
             }
         }
 
