@@ -23,7 +23,8 @@ namespace grizzHack_WebApp
                 lblStatus.ForeColor = System.Drawing.Color.Red;
             }
 
-            if (!Page.IsPostBack) {
+            if (!Page.IsPostBack)
+            {
                 divCheck.Visible = false;
                 divStatus.Visible = false;
                 divUpload.Visible = false;
@@ -32,11 +33,9 @@ namespace grizzHack_WebApp
                 //Get Both cookies
             }
 
-
             if (Request.QueryString["id"] != null)
             {
                 connectionNumber = Request.QueryString["id"];
-
             }
             else
             {
@@ -66,9 +65,6 @@ namespace grizzHack_WebApp
                 Response.Cookies["phoneCode"].Value = phoneCode;
             }
 
-
-            
-
             if (!Page.IsPostBack)
             {
                 if (connectionNumber != "")
@@ -90,7 +86,6 @@ namespace grizzHack_WebApp
                         divUpload.Visible = false;
                     }
                 }
-                
             }
         }
 
@@ -212,38 +207,37 @@ namespace grizzHack_WebApp
 
         protected void UploadButton_Click(object sender, EventArgs e)
         {
+            UpdatePanel2.Update();
+            if (FileUploadControl.HasFile)
+            {
                 UpdatePanel2.Update();
-                if (FileUploadControl.HasFile)
-                {
-                    UpdatePanel2.Update();
-                    System.Threading.Thread.Sleep(500);
-                    string imageStr = Convert.ToBase64String(FileUploadControl.FileBytes);
+                System.Threading.Thread.Sleep(500);
+                string imageStr = Convert.ToBase64String(FileUploadControl.FileBytes);
 
-                    try
-                    {
-                        connectionNumber = Request.Cookies["compCode"].Value;
-                        if (connectionNumber == "")
-                        {
-                            connectionNumber = txtNumbers.Text;
-                        }
-                    }
-                    catch
+                try
+                {
+                    connectionNumber = Request.Cookies["compCode"].Value;
+                    if (connectionNumber == "")
                     {
                         connectionNumber = txtNumbers.Text;
                     }
-                    lblUploadStatus.Visible = false;
-                    tcp.sendData("image" + ";" + connectionNumber + ";" + phoneCode + ";" + imageStr);
-                    divUpload.Visible = true;
-                    divStatus.Visible = true;
-                    divCheck.Visible = true;
                 }
-                else
+                catch
                 {
-                    divUpload.Visible = true;
-                    divStatus.Visible = true;
-                    lblUploadStatus.Text = "No Image Selected.";
+                    connectionNumber = txtNumbers.Text;
                 }
-
+                lblUploadStatus.Visible = false;
+                tcp.sendData("image" + ";" + connectionNumber + ";" + phoneCode + ";" + imageStr);
+                divUpload.Visible = true;
+                divStatus.Visible = true;
+                divCheck.Visible = true;
+            }
+            else
+            {
+                divUpload.Visible = true;
+                divStatus.Visible = true;
+                lblUploadStatus.Text = "No Image Selected.";
+            }
         }
     }
 }

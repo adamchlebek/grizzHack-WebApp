@@ -69,9 +69,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.aspx" />
-    <Content Include="app.js" />
-    <Content Include="download.css" />
     <Content Include="index.aspx" />
+    <Content Include="index.css" />
     <Content Include="loading.gif" />
     <Content Include="Pictacom White.png" />
     <Content Include="Pictacom.png" />
