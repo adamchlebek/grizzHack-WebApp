@@ -79,7 +79,6 @@ namespace grizzHack_WebApp
             UpdatePanel2.Update();
             if (FileUploadControl.HasFile)
             {
-                lblUploadStatus.Text = "Uploading...";
                 UpdatePanel2.Update();
                 System.Threading.Thread.Sleep(500);
                 string imageStr = Convert.ToBase64String(FileUploadControl.FileBytes);
@@ -96,7 +95,7 @@ namespace grizzHack_WebApp
                 {
                     connectionNumber = txtNumbers.Text;
                 }
-
+                lblUploadStatus.Visible = false;
                 tcp.sendData("image" + ";" + connectionNumber + ";" + phoneCode + ";" + imageStr);
                 divUpload.Visible = true;
                 divStatus.Visible = true;
@@ -150,8 +149,10 @@ namespace grizzHack_WebApp
             }
         }
 
-        protected void FileUpload_Uploading(object sender, EventArgs e) {
-            if (FileUploadControl.HasFile) {
+        protected void FileUpload_Uploading(object sender, EventArgs e)
+        {
+            if (FileUploadControl.HasFile)
+            {
                 lblStatus.Text = "Ready to Send!";
             }
         }

@@ -70,6 +70,8 @@
   <ItemGroup>
     <Content Include="index.aspx" />
     <Content Include="loading.gif" />
+    <Content Include="Pictacom White.png" />
+    <Content Include="Pictacom.png" />
     <Content Include="stylesheet.css" />
     <Content Include="Web.config" />
   </ItemGroup>

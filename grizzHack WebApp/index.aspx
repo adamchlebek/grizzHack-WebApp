@@ -8,11 +8,11 @@
     <link href="stylesheet.css" rel="stylesheet" type="text/css" media="all" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <meta charset="utf-8" />
-    <title>Home</title>
+    <title>Pictacom</title>
 </head>
 <body style="background-color: #120E1B">
     <br />
-    <h1 style="color: #0099E5">NAME OF THING</h1>
+    <h1 style="font-weight: bold; color: #FFF; font-size: 500%; font-family: berlin">Pictacom</h1>
     <form runat="server" id="upload" method="post" enctype="multipart/form-data">
 
         <div runat="server" class="upload" id="divConnect">
