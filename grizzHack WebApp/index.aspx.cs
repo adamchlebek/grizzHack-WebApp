@@ -8,5 +8,10 @@ namespace grizzHack_WebApp
         {
             Response.Redirect("http://grizzyhack.gear.host/app.aspx");
         }
+
+        protected void btnDownloadClient_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("http://grizzyhack.gear.host/PictacomClient.exe");
+        }
     }
 }

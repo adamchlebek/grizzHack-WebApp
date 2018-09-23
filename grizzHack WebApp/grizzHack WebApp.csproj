@@ -72,6 +72,7 @@
     <Content Include="index.aspx" />
     <Content Include="index.css" />
     <Content Include="loading.gif" />
+    <Content Include="PictacomClient.exe" />
     <Content Include="Pictacom White.png" />
     <Content Include="Pictacom.png" />
     <Content Include="stylesheet.css" />

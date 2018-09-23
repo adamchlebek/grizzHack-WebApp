@@ -11,13 +11,13 @@
 <body>
     <form id="form1" runat="server">
         <div class="center-screen">
-            <img src="Pictacom.png" style="width: 33%; height: 100px;"/>
+            <img src="Pictacom.png" style="height: 80px;"/>
             <br/>
             <br/>
             <asp:Button ID="btnWebApp" runat="server" class="btn btn-primary" Text="Webapp" OnClick="btnWebApp_Click" />
             <br />
             <br />
-            <asp:Button ID="btnDownloadClient" runat="server" class="btn btn-outline-success" Text="Download Client" />
+            <asp:Button ID="btnDownloadClient" runat="server" class="btn btn-outline-success" Text="Download Client" OnClick="btnDownloadClient_Click" />
         </div>
     </form>
 </body>
