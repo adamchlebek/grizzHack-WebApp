@@ -23,12 +23,15 @@ namespace grizzHack_WebApp
                 lblStatus.ForeColor = System.Drawing.Color.Red;
             }
 
-            divCheck.Visible = false;
-            divStatus.Visible = false;
-            divUpload.Visible = false;
+            if (!Page.IsPostBack) {
+                divCheck.Visible = false;
+                divStatus.Visible = false;
+                divUpload.Visible = false;
 
-            //Try to checkFor Cookies
-            //Get Both cookies
+                //Try to checkFor Cookies
+                //Get Both cookies
+            }
+
 
             if (Request.QueryString["id"] != null)
             {
@@ -88,41 +91,6 @@ namespace grizzHack_WebApp
                     }
                 }
                 
-            }
-        }
-
-        protected void UploadButton_Click(object sender, EventArgs e)
-        {
-            UpdatePanel2.Update();
-            if (FileUploadControl.HasFile)
-            {
-                UpdatePanel2.Update();
-                System.Threading.Thread.Sleep(500);
-                string imageStr = Convert.ToBase64String(FileUploadControl.FileBytes);
-
-                try
-                {
-                    connectionNumber = Request.Cookies["compCode"].Value;
-                    if (connectionNumber == "")
-                    {
-                        connectionNumber = txtNumbers.Text;
-                    }
-                }
-                catch
-                {
-                    connectionNumber = txtNumbers.Text;
-                }
-                lblUploadStatus.Visible = false;
-                tcp.sendData("image" + ";" + connectionNumber + ";" + phoneCode + ";" + imageStr);
-                divUpload.Visible = true;
-                divStatus.Visible = true;
-                divCheck.Visible = true;
-            }
-            else
-            {
-                divUpload.Visible = true;
-                divStatus.Visible = true;
-                lblUploadStatus.Text = "No Image Selected.";
             }
         }
 
@@ -208,6 +176,74 @@ namespace grizzHack_WebApp
             {
                 return true;
             }
+        }
+
+        protected void btnUpload_Click1(object sender, EventArgs e)
+        {
+            if (FileUploadControl.HasFile)
+            {
+                string imageStr = Convert.ToBase64String(FileUploadControl.FileBytes);
+
+                try
+                {
+                    connectionNumber = Request.Cookies["compCode"].Value;
+                    if (connectionNumber == "")
+                    {
+                        connectionNumber = txtNumbers.Text;
+                    }
+                }
+                catch
+                {
+                    connectionNumber = txtNumbers.Text;
+                }
+                lblUploadStatus.Visible = false;
+                tcp.sendData("image" + ";" + connectionNumber + ";" + phoneCode + ";" + imageStr);
+                divUpload.Visible = true;
+                divStatus.Visible = true;
+                divCheck.Visible = true;
+            }
+            else
+            {
+                divUpload.Visible = true;
+                divStatus.Visible = true;
+                lblUploadStatus.Text = "No Image Selected.";
+            }
+        }
+
+        protected void UploadButton_Click(object sender, EventArgs e)
+        {
+                UpdatePanel2.Update();
+                if (FileUploadControl.HasFile)
+                {
+                    UpdatePanel2.Update();
+                    System.Threading.Thread.Sleep(500);
+                    string imageStr = Convert.ToBase64String(FileUploadControl.FileBytes);
+
+                    try
+                    {
+                        connectionNumber = Request.Cookies["compCode"].Value;
+                        if (connectionNumber == "")
+                        {
+                            connectionNumber = txtNumbers.Text;
+                        }
+                    }
+                    catch
+                    {
+                        connectionNumber = txtNumbers.Text;
+                    }
+                    lblUploadStatus.Visible = false;
+                    tcp.sendData("image" + ";" + connectionNumber + ";" + phoneCode + ";" + imageStr);
+                    divUpload.Visible = true;
+                    divStatus.Visible = true;
+                    divCheck.Visible = true;
+                }
+                else
+                {
+                    divUpload.Visible = true;
+                    divStatus.Visible = true;
+                    lblUploadStatus.Text = "No Image Selected.";
+                }
+
         }
     }
 }
